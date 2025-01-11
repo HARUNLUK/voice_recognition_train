@@ -112,7 +112,7 @@ def predict():
 
     # Make prediction based on the user's model
     prediction = model.predict([mfcc_features])
-    class_label = 'User' if prediction[0] == 1 else 'Other'
+    class_label = True if prediction[0] == 1 else False
 
     return jsonify({"prediction": class_label})
 
