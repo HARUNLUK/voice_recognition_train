@@ -20,7 +20,7 @@ import {
 import { Mic, Upload } from "lucide-react";
 
 const App = () => {
-  // State management
+  // Durum yönetimi
   const [file, setFile] = useState(null);
   const [userName, setUserName] = useState("");
   const [users, setUsers] = useState([]);
@@ -30,14 +30,14 @@ const App = () => {
   const [dragActive, setDragActive] = useState(false);
   const [predictionResult, setPredictionResult] = useState(null);
 
-  // Fetch users on component mount
+  // Bileşen yüklendiğinde kullanıcıları getir
   const fetchUsers = useCallback(async () => {
     try {
       const response = await axios.get("http://localhost:5000/users");
       setUsers(response.data.users);
     } catch (error) {
-      console.error("Error fetching users:", error);
-      showError("Failed to fetch users. Please try again later.");
+      console.error("Kullanıcılar getirilirken hata:", error);
+      showError("Kullanıcılar getirilemedi. Lütfen daha sonra tekrar deneyin.");
     }
   }, []);
 
@@ -46,18 +46,18 @@ const App = () => {
   }, [fetchUsers]);
 
   const getResultColor = () => {
-    if (predictionResult === true) return "#4caf50"; // Green for success
-    if (predictionResult === false) return "#f44336"; // Red for failure
+    if (predictionResult === true) return "#4caf50"; // Başarılı için yeşil
+    if (predictionResult === false) return "#f44336"; // Başarısız için kırmızı
     return "inherit";
   };
 
-  // File handling functions
+  // Dosya işleme fonksiyonları
   const handleFile = (file) => {
     if (file && file.type === "audio/wav") {
       setFile(file);
       setMessage("");
     } else {
-      showError("Please upload a .wav file");
+      showError("Lütfen .wav dosyası yükleyin");
     }
   };
 
@@ -67,7 +67,7 @@ const App = () => {
     }
   };
 
-  // Drag and drop handlers
+  // Sürükle ve bırak işleyicileri
   const handleDrag = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -88,7 +88,7 @@ const App = () => {
     }
   };
 
-  // Form submission handlers
+  // Form gönderme işleyicileri
   const handleTrainSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
@@ -108,8 +108,8 @@ const App = () => {
       setUsers((prevUsers) => [...new Set([...prevUsers, userName])]);
       resetForm();
     } catch (error) {
-      console.error("Error training model:", error);
-      showError("Failed to train model. Please try again.");
+      console.error("Model eğitilirken hata:", error);
+      showError("Model eğitilemedi. Lütfen tekrar deneyin.");
     } finally {
       setLoading(false);
     }
@@ -134,26 +134,26 @@ const App = () => {
       
       setPredictionResult(response.data?.prediction);
       if (response.data?.prediction === true) {
-        showSuccess("Voice match confirmed! ✓");
+        showSuccess("Ses eşleşmesi onaylandı! ✓");
       } else {
-        showError("Voice does not match ✗");
+        showError("Ses eşleşmesi başarısız ✗");
       }
     } catch (error) {
-      console.error("Error predicting:", error);
-      showError("Failed to process voice prediction. Please try again.");
+      console.error("Tahmin yapılırken hata:", error);
+      showError("Ses tahmini yapılamadı. Lütfen tekrar deneyin.");
     } finally {
       setLoading(false);
     }
   };
 
-  // Helper functions
+  // Yardımcı fonksiyonlar
   const validateForm = () => {
     if (!userName) {
-      showError("Please enter your name");
+      showError("Lütfen adınızı girin");
       return false;
     }
     if (!file) {
-      showError("Please select a file");
+      showError("Lütfen bir dosya seçin");
       return false;
     }
     return true;
@@ -184,10 +184,10 @@ const App = () => {
     <Container maxWidth="md" sx={{ py: 4 }}>
       <Box sx={{ textAlign: "center", mb: 4 }}>
         <Typography variant="h3" gutterBottom>
-          Voice Recognition
+          Ses Tanıma
         </Typography>
         <Typography variant="subtitle1" color="text.secondary">
-          Train models and predict voices with ease
+          Kolayca model eğitin ve ses tahmini yapın
         </Typography>
       </Box>
 
@@ -213,8 +213,8 @@ const App = () => {
           centered
           sx={{ mb: 3 }}
         >
-          <Tab label="Train Model" icon={<Mic />} />
-          <Tab label="Predict Voice" icon={<Upload />} />
+          <Tab label="Model Eğit" icon={<Mic />} />
+          <Tab label="Ses Tahmin Et" icon={<Upload />} />
         </Tabs>
 
         <form
@@ -224,21 +224,21 @@ const App = () => {
             {activeTab === 0 ? (
               <TextField
                 fullWidth
-                label="Enter your name"
+                label="Adınızı girin"
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}
                 variant="outlined"
               />
             ) : (
               <FormControl fullWidth>
-                <InputLabel>Select User</InputLabel>
+                <InputLabel>Kullanıcı Seçin</InputLabel>
                 <Select
                   value={userName}
-                  label="Select User"
+                  label="Kullanıcı Seçin"
                   onChange={(e) => setUserName(e.target.value)}
                 >
                   <MenuItem value="">
-                    <em>None</em>
+                    <em>Seçiniz</em>
                   </MenuItem>
                   {users.map((user, index) => (
                     <MenuItem key={index} value={user}>
@@ -277,7 +277,7 @@ const App = () => {
                 <Typography>
                   {file
                     ? file.name
-                    : "Drop your .wav file here or click to browse"}
+                    : ".wav dosyanızı buraya sürükleyin veya seçmek için tıklayın"}
                 </Typography>
               </Box>
             </Paper>
@@ -292,9 +292,9 @@ const App = () => {
               {loading ? (
                 <CircularProgress size={24} color="inherit" />
               ) : activeTab === 0 ? (
-                "Train Model"
+                "Model Eğit"
               ) : (
-                "Predict Voice"
+                "Ses Tahmin Et"
               )}
             </Button>
 

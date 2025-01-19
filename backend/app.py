@@ -1,3 +1,6 @@
+import matplotlib
+matplotlib.use('Agg')  # Use a non-interactive backend for saving images
+
 import os
 import librosa
 import numpy as np
@@ -6,6 +9,9 @@ from flask_cors import CORS
 from sklearn.svm import SVC
 import pickle
 import io
+import matplotlib.pyplot as plt
+from sklearn.metrics import confusion_matrix
+import seaborn as sns
 
 app = Flask(__name__)
 CORS(app)
@@ -25,7 +31,7 @@ def save_model(user_name, model):
     model_filename = f"models/model_{user_name}.pkl"
     with open(model_filename, 'wb') as f:
         pickle.dump(model, f)
-        
+
 # Load others' data from './data/others' directory
 def load_others_data():
     others_data = []
@@ -42,6 +48,17 @@ def load_others_data():
                 others_labels.append(0)  # Label for others is 0
     
     return np.array(others_data), np.array(others_labels)
+
+# Function to plot and save confusion matrix
+def plot_confusion_matrix(y_true, y_pred, user_name):
+    cm = confusion_matrix(y_true, y_pred)
+    plt.figure(figsize=(6, 6))
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=['Others', 'User'], yticklabels=['Others', 'User'])
+    plt.title(f"Confusion Matrix for {user_name}")
+    plt.ylabel('True label')
+    plt.xlabel('Predicted label')
+    plt.savefig(f'./models/confusion_matrix_{user_name}.png')
+    plt.close()
 
 # Endpoint to train a model for a user
 @app.route('/train-model', methods=['POST'])
@@ -69,6 +86,12 @@ def train_model():
     # Train the model (SVC classifier)
     model = SVC(kernel='linear')
     model.fit(X_train, y_train)
+
+    # Make predictions to generate confusion matrix
+    y_pred = model.predict(X_train)
+
+    # Plot and save confusion matrix
+    plot_confusion_matrix(y_train, y_pred, user_name)
 
     # Save the trained model for the user
     save_model(user_name, model)
