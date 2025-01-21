@@ -1,70 +1,62 @@
-# Getting Started with Create React App
+🎤 Kullanıcı Tabanlı Ses Tanıma Uygulaması
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Bu proje, kullanıcının kendi ses dosyasını yükleyerek model eğitmesi ve daha sonra ses tanıma işlemi yaparak gelen sesin o kullanıcıya ait olup olmadığını belirlemesini sağlar.
 
-## Available Scripts
+🚀 Özellikler
 
-In the project directory, you can run:
+📂 Ses Yükleme: Kullanıcı, kendi ses dosyasını sisteme yükler.
 
-### `npm start`
+🧠 Model Eğitme: Kullanıcının yüklediği ses dosyasıyla bir makine öğrenmesi modeli eğitilir.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+🔍 Ses Tanıma: Kullanıcının yeni yüklediği bir ses, eğitilmiş model ile karşılaştırılarak tahminde bulunulur.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+🛠️ Kurulum ve Çalıştırma
 
-### `npm test`
+1️⃣ Depoyu Klonlayın
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Projeyi yerel bilgisayarınıza indirin:
 
-### `npm run build`
+git clone [GitHub Repo Linkiniz]
+cd voice_recognition
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2️⃣ Backend Kurulumu (Python & Flask)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Backend tarafının çalışabilmesi için aşağıdaki adımları takip edin:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Backend'i Çalıştırma
 
-### `npm run eject`
+cd backend
+pip install -r requirements.txt
+python app.py
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Bu işlem başarılı olduğunda http://localhost:5000 adresinde API çalışacaktır.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3️⃣ Frontend Kurulumu (React.js)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+React.js ile oluşturulan frontend'i çalıştırmak için:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+cd client
+npm install
+npm start
 
-## Learn More
+Bu komutları çalıştırdıktan sonra http://localhost:3000 adresinden uygulamaya erişebilirsiniz.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+📌 Kullanım Adımları
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1️⃣ Ses Dosyası Yükle butonu ile kendi sesinizi yükleyin.2️⃣ Modeli Eğit butonuna basarak yüklenen sesi backend'e gönderin ve model eğitilsin.3️⃣ Tahmin Et butonuna basarak yeni bir ses dosyası yükleyin ve sistemin sesi tanıyıp tanımadığını görün.
 
-### Code Splitting
+🛠️ Kullanılan Teknolojiler
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Frontend: React.js (Fetch API, File Upload)
 
-### Analyzing the Bundle Size
+Backend: Python, Flask
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Makine Öğrenmesi: Librosa, TensorFlow/Keras
 
-### Making a Progressive Web App
+Veri Formatı: WAV (Waveform Audio File)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+📄 Lisans
 
-### Advanced Configuration
+Bu proje MIT lisansı altında sunulmuştur.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+📌 Geliştirici: [Adınız]📅 Proje Tarihi: Ocak 2025
