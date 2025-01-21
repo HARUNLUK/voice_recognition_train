@@ -54,3 +54,8 @@ Backend: Python, Flask
 Makine Öğrenmesi: Librosa, TensorFlow/Keras
 
 Veri Formatı: WAV (Waveform Audio File)
+
+kullanılan verisetleri:
+https://www.kaggle.com/datasets/ogechukwu/voice
+https://www.kaggle.com/datasets/mathurinache/the-lj-speech-dataset/code
+https://www.kaggle.com/datasets/vjcalling/speaker-recognition-audio-dataset/data
