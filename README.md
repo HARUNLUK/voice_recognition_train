@@ -54,9 +54,3 @@ Backend: Python, Flask
 Makine Öğrenmesi: Librosa, TensorFlow/Keras
 
 Veri Formatı: WAV (Waveform Audio File)
-
-📄 Lisans
-
-Bu proje MIT lisansı altında sunulmuştur.
-
-📌 Geliştirici: [Adınız]📅 Proje Tarihi: Ocak 2025
